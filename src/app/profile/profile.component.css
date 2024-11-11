@@ -1,0 +1,52 @@
+a{
+    text-decoration: none;
+}
+.profile-header {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+}
+.profile-header img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+.bio {
+    margin-top: 20px;
+}
+.social-links a {
+    margin: 0 10px;
+}
+
+.modal{
+    background-color: rgba(0, 0, 0, 0.7) !important; 
+}
+
+
+
+/* Heart button */
+.like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.3s ease; /* Smooth transition */
+  }
+  
+  .like-btn .liked {
+    color: #ff6961; /* Liked color for heart icon */
+  }
+  
+  .like-btn .far.fa-heart {
+    color: #888; /* Default gray color for unliked heart */
+  }
+  
+  .like-btn:hover .fas.fa-heart, 
+  .like-btn:hover .far.fa-heart {
+    color: #ff6961; /* Same color on hover for visual feedback */
+  }
+  
+  .liked{
+    margin-right: 0.5rem;
+  }
+  

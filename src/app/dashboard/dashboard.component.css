@@ -1,0 +1,14 @@
+.dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -6px; 
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: #fff;
+    z-index: 1000;
+}
+
+.dropdown-menu {
+    margin-top: 10px !important;
+}

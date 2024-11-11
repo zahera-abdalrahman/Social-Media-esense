@@ -1,0 +1,211 @@
+<div class="color-theme-blue mont-font">
+  <div class="main-wrapper">
+      <div class="main-content right-chat-active" style="padding-left: 0 !important; padding-right: 0 !important;">
+          <div class="middle-sidebar-bottom bg-lightblue">
+              <div class="middle-sidebar-left">
+                  <!-- Card with fixed position that will disappear on small screens -->
+                  <div class="card position-fixed d-none d-md-block" style="width: 16%; left: 1rem; height: 330px;">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center mt-3">
+                        <div class="mb-3 d-flex justify-content-center">
+                            <img *ngIf="loggedinUser.profileImage; else defaultImage" 
+                            [src]="loggedinUser.profileImage" 
+                            alt="Profile Image" 
+                            class="rounded-circle w-75 border border-2 border-color">
+                       <ng-template #defaultImage>
+                        <img *ngIf="loggedinUser.gender === 'Male'; else femaleImage" 
+                        src="../../assets/Images/male.png" 
+                        alt="Default Male Profile Image" 
+                        class="rounded-circle w-75 border border-2 border-color">
+                        <ng-template #femaleImage>
+                            <img *ngIf="loggedinUser.gender === 'Female'" 
+                                    src="../../assets/Images/female.png" 
+                                    alt="Default Female Profile Image" 
+                                    class="rounded-circle w-75 border border-2 border-color">
+                        </ng-template>
+                       </ng-template>
+                        </div>
+                        <div class="fw-bold mb-4">
+                            {{ loggedinUser.firstName }} {{ loggedinUser.lastName }}
+                        </div>
+                        <div class="text-muted">
+                            {{ loggedinUser.userName }}
+                        </div>
+                    </div>
+                </div>
+                  <div class="row feed-body">
+                      <div class="col-xl-12 col-xxl-12 col-lg-12">
+                          <div class="card w-100 shadow-xss rounded-xxl border-0 ps-4 pt-4 pe-4 pb-3 mb-3">
+                              <form [formGroup]="postForm" (ngSubmit)="createPost()">
+                                  <div class="card-body p-0">
+                                      <a (click)="createPost()" class="font-xssss fw-600 text-grey-800 card-body p-0 d-flex align-items-center">
+                                          <i class="btn-round-sm font-xs text-primary feather-edit-3 me-2 bg-greylight cursor-pointer"></i>Create Post
+                                      </a>
+                                  </div>
+                                  <div class="card-body p-0 mt-3 position-relative">
+                                      <figure class="avatar position-absolute ms-2 mt-1 top-5">
+                                          <img  *ngIf="loggedinUser.profileImage; else defaultImagePost" [src]="loggedinUser.profileImage"  class="shadow-sm rounded-circle w30">
+                                      </figure>
+
+                                      <ng-template #defaultImagePost>
+                                        <img *ngIf="loggedinUser.gender === 'Male'; else femaleImagePost" 
+                                        src="../../assets/Images/male.png" 
+                                        alt="Default Male Profile Image" 
+                                        class="shadow-sm rounded-circle w30">
+                                        <ng-template #femaleImagePost>
+                                            <img *ngIf="loggedinUser.gender === 'Female'" 
+                                                    src="../../assets/Images/female.png" 
+                                                    alt="Default Female Profile Image" 
+                                                    class="shadow-sm rounded-circle w30">
+                                        </ng-template>
+                                       </ng-template>
+                                      <textarea name="message" class="h100 bor-0 w-100 rounded-xxl p-2 ps-5 font-xs text-grey-800 fw-500 border-light-md theme-dark-bg" cols="30" rows="10" placeholder="What's on your mind?" formControlName="txtContent"></textarea>
+                                      <div *ngIf="postForm.get('txtContent')?.invalid && postForm.get('txtContent')?.touched" class="text-danger">
+                                          Content is required.
+                                      </div>
+                                  </div>
+                                  <div class="card-body d-flex p-0 mt-0">
+                                      <div class="card-body d-flex p-0 mt-0">
+                                          <label class="d-flex align-items-center font-xssss fw-600 ls-1 text-grey-700 text-dark pe-4 cursor-pointer" for="postImage">
+                                              <i class="font-md text-success feather-image me-2"></i>
+                                              <span class="d-none-xs">Photo</span>
+                                          </label>
+                                          <input type="file" id="postImage" (change)="onFileSelected($event)"  style="display: none;">
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                          <ng-container *ngIf="posts && posts.length > 0">
+                              <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-4" *ngFor="let post of posts">
+                                  <div class="card-body p-0 d-flex align-items-center">
+                                      <figure class="avatar me-3">
+                                          <img *ngIf="post.user.profileImage; else defaultImagePosts" [src]="post.user.profileImage" alt="image" class="shadow-sm rounded-circle w45">
+                                      </figure>
+                                      <ng-template #defaultImagePosts>
+                                        <img *ngIf="post.user.gender === 'Male'; else femaleImagePosts" 
+                                        src="../../assets/Images/male.png" 
+                                        alt="Default Male Profile Image" 
+                                        class="shadow-sm rounded-circle w30">
+                                        <ng-template #femaleImagePosts>
+                                            <img *ngIf="post.user.gender === 'Female'" 
+                                                    src="../../assets/Images/female.png" 
+                                                    alt="Default Female Profile Image" 
+                                                    class="shadow-sm rounded-circle w30">
+                                        </ng-template>
+                                       </ng-template>
+                                      <div>
+                                          <h4 class="fw-700 text-grey-800 font-xs mt-1">{{ post.user.firstName + " " + post.user.lastName }}
+                                              <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey">{{ post.createdAt | date: 'longDate' }}</span>
+                                          </h4>
+                                      </div>
+                                  </div>
+                                  <div class="card-body p-0 me-lg-5">
+                                      <p class="fw-600 lh-26 text-gray-800 font-l w-100 mb-2">{{ post.contentText }}</p>
+                                  </div>
+                                  <div class="card-body p-0 me-lg-5 mb-3">
+                                      <div class="row ps-2 pe-2">
+                                          <div *ngIf="post.contentImage" class="col-sm-12 p-1">
+                                              <img [src]="post.contentImage" class="rounded-3 img-fluid w-75" alt="image" style="height: 350px;">
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="card-body d-flex p-0 align-items-center">
+                                    <button (click)="toggleLike(post.postId)" class="like-btn">
+                                        <i [ngClass]="isLiked(post.postId) ? 'fas fa-heart liked' : 'far fa-heart'"></i>
+                                    </button>
+                                          <span (click)="openLikesModal(post.postId)" class="cursor-pointer like-count">{{ postLikes(post.postId) }} Like</span>
+                                      <a (click)="toggleComments(post.postId)" class="d-flex align-items-center fw-600 text-grey-900 lh-26 font-xssss cursor-pointer">
+                                          <i class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg me-2 cursor-pointer"></i>
+                                          <span class="d-none-xs">Comment</span>
+                                      </a>
+                                  </div>
+                                  <div *ngIf="isCommentsVisible(post.postId)" class="card-body p-3 d-block comments-section">
+                                      <form [formGroup]="commentForm">
+                                          <div class="d-flex align-items-center">
+                                              <input formControlName="txtComment" placeholder="Add a comment" class="form-control comment-input bg-color" />
+                                              <button type="button" class="btn btn-primary ms-2 btn-color" (click)="createComment(post.postId)">
+                                                  Comment
+                                              </button>
+                                          </div>
+                                      </form>
+                                      <div *ngFor="let comment of post.comments" class="comment-item mb-3">
+                                          <div class="d-flex align-items-start">
+                                              <figure class="avatar me-2">
+                                                  <img *ngIf="post.user.profileImage; else defaultImageComment" [src]="comment.user.profileImage" alt="user" class="rounded-circle w30">
+                                              </figure>
+                                              <ng-template #defaultImageComment>
+                                                <img *ngIf="loggedinUser.gender === 'Male'; else femaleImagePost" 
+                                                src="../../assets/Images/male.png" 
+                                                alt="Default Male Profile Image" 
+                                                class="shadow-sm rounded-circle w30">
+                                                <ng-template #femaleImagePost>
+                                                    <img *ngIf="loggedinUser.gender === 'Female'" 
+                                                            src="../../assets/Images/female.png" 
+                                                            alt="Default Female Profile Image" 
+                                                            class="shadow-sm rounded-circle w30">
+                                                </ng-template>
+                                               </ng-template>
+                                              <div>
+                                                  <strong>{{ comment.user.firstName }} {{ comment.user.lastName }}:</strong>
+                                                  <p class="mb-1 text-grey-500">{{ comment.content }}</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div *ngIf="post.comments.length === 0" class="text-muted">
+                                          No comments available.
+                                      </div>
+                                  </div>
+                              </div>
+                          </ng-container>
+                      </div>
+                  </div>
+              </div>
+          </div>            
+      </div>
+  </div> 
+</div>
+
+<ng-template #noPosts>
+  <p class="text-muted">No posts available</p>
+</ng-template>
+
+<!-- Likes Modal -->
+<div class="modal fade" id="likesModal" tabindex="-1" role="dialog" aria-labelledby="likesModalLabel" aria-hidden="true">
+  <div class="modal-dialog custom-modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="likesModalLabel">Users Who Liked This Post</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeLikesModal()">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group" *ngIf="currentPostLikes && currentPostLikes.length > 0; else noLikes">
+                <li class="list-group-item d-flex align-items-center" *ngFor="let like of currentPostLikes">
+                  <figure class="avatar me-3">
+                    <img *ngIf="like.user.profileImage; else defaultImagePosts" [src]="like.user.profileImage" alt="image" class="shadow-sm rounded-circle w40">
+                </figure>
+                <ng-template #defaultImagePosts>
+                  <img *ngIf="like.user.gender === 'Male'; else femaleImagePosts" 
+                  src="../../assets/Images/male.png" 
+                  alt="Default Male Profile Image" 
+                  class="shadow-sm rounded-circle w40">
+                  <ng-template #femaleImagePosts>
+                      <img *ngIf="like.user.gender === 'Female'" 
+                              src="../../assets/Images/female.png" 
+                              alt="Default Female Profile Image" 
+                              class="shadow-sm rounded-circle w40">
+                  </ng-template>
+                 </ng-template>
+                  <span class="fw-semibold">{{ like.user.firstName }} {{ like.user.lastName }}</span>
+                </li>
+              </ul>
+              <ng-template #noLikes>
+                  <p class="text-muted">No users have liked this post yet.</p>
+              </ng-template>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="closeLikesModal()">Close</button>
+          </div>
+      </div>
+  </div>
+</div>

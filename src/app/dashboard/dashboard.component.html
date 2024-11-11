@@ -1,0 +1,51 @@
+<div class="nav-header bg-white shadow-xs border-0">
+    <div class="nav-top">
+        <a routerLink="/dashboard/Home" class="text-decoration-none cursor-pointer"><i class="feather-zap text-success display1-size me-2 ms-0"></i><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">Sociala. </span> </a>
+        
+    </div>
+
+    <a class="p-2 text-center ms-auto menu-icon text-decoration-none cursor-pointer" aria-expanded="false"  routerLink="/dashboard/Home">
+        <span class="dot-count bg-warning"></span><i class="feather-home font-xl text-current"></i>
+    </a>
+
+
+    <div class="p-2 text-center ms-3 position-relative dropdown-menu-icon menu-icon cursor-pointer">
+        <i class="feather-settings animation-spin d-inline-block font-xl text-current cursor-pointer" routerLink="/dashboard/setting"></i>
+       
+    </div>
+
+        
+    <div class="dropdown p-2 text-center ms-3 position-relative">
+        <a href="#" class="menu-icon cursor-pointer " id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <img *ngIf="loggedinUser.profileImage; else defaultImage" [src]="loggedinUser.profileImage"  alt="user" class="w40 mt--1">
+        </a>
+        <ng-template #defaultImage>
+            <img *ngIf="loggedinUser.gender === 'Male'; else femaleImage" 
+            src="../../assets/Images/male.png" 
+            alt="Default Male Profile Image" 
+            class="w40 mt--1">
+            <ng-template #femaleImage>
+                <img *ngIf="loggedinUser.gender === 'Female'" 
+                        src="../../assets/Images/female.png" 
+                        alt="Default Female Profile Image" 
+                        class="w40 mt--1">
+            </ng-template>
+           </ng-template>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown" *ngIf="loggedinUser; else loggedOut">
+            <li><a class="dropdown-item cursor-pointer" routerLink="/dashboard/profile">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item cursor-pointer" (click)="logout()">Logout</a></li>
+        </ul>
+    
+        <ng-template #loggedOut>
+           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+            <li class="dropdown-item nav-item">
+                <span class="nav-link">User is not logged in</span>
+            </li>
+           </ul>
+        </ng-template>
+    </div>
+    
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,120 @@
+<div class="color-theme-blue">
+
+<div class="main-wrap">
+
+    <div class="nav-header bg-transparent shadow-none border-0">
+        <div class="nav-top w-100">
+            <a href="index.html"><i class="feather-zap text-success display1-size me-2 ms-0"></i><span class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">Sociala. </span> </a>
+            <a href="#" class="mob-menu ms-auto me-2 chat-active-btn"><i class="feather-message-circle text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+            <a href="default-video.html" class="mob-menu me-2"><i class="feather-video text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+            <a href="#" class="me-2 menu-search-icon mob-menu"><i class="feather-search text-grey-900 font-sm btn-round-md bg-greylight"></i></a>
+            <button class="nav-menu me-0 ms-2"></button>
+
+            <a href="#" class="ms-auto"></a>
+
+        </div>
+        
+        
+    </div>
+
+    <div class="row">
+        <div class="col-xl-5 d-none d-xl-block p-0 vh-100 bg-image-cover bg-no-repeat" style="background-image: url(../../assets/Images/login-bg-2.jpg);"></div>
+        <div class="col-xl-7 vh-100 align-items-center d-flex bg-white rounded-3 overflow-hidden">
+            <div class="card shadow-none border-0 ms-auto me-auto login-card w-100">
+                <div class="card-body rounded-0 text-left">
+                    <h2 class="fw-700 display1-size display2-md-size mb-4">Create <br>your account</h2>                        
+                    <form [formGroup]="registerForm">
+                        
+                        <div class="form-row">
+                            <div class="form-group icon-input mb-3 col-md-6">
+                                <i class="font-sm ti-user text-grey-500 pe-0"></i>
+                                <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" placeholder="Your First Name" formControlName="txtfName">
+                                <div *ngIf="registerForm.controls['txtfName'].touched && registerForm.hasError('required', 'txtfName')" class="invalid-feedback d-block">First Name is required.</div>
+                            </div>
+                        
+                            <div class="form-group icon-input mb-3 col-md-6">
+                                <i class="font-sm ti-user text-grey-500 pe-0"></i>
+                                <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" placeholder="Your Last Name" formControlName="txtlName">
+                                <div *ngIf="registerForm.controls['txtlName'].touched && registerForm.hasError('required', 'txtlName')" class="invalid-feedback d-block">Last Name is required.</div>
+                            </div>
+                        </div>
+                        
+
+                      <div class="form-group icon-input mb-3">
+                        <i class="font-sm ti-calendar text-grey-500 pe-0"></i>
+                        <input type="date" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" placeholder="Your Birth Date" formControlName="txtDOB">
+                        <div *ngIf="registerForm.controls['txtDOB'].touched && registerForm.hasError('required', 'txtDOB')" class="invalid-feedback d-block">Birth Date is required.</div>
+                      </div>
+
+
+                      <label for="gender" class="font-xss fw-600 text-grey-800 mb-2">Gender</label>
+                      <div class="d-flex mb-3">
+                        <div class="form-check me-3">
+                          <input type="radio" id="genderMale" value="Male" class="form-check-input" formControlName="txtGender" />
+                          <label class="form-check-label" for="genderMale">Male</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="radio" id="genderFemale" value="Female" class="form-check-input" formControlName="txtGender" />
+                          <label class="form-check-label" for="genderFemale">Female</label>
+                        </div>
+                      </div>
+                      <div *ngIf="registerForm.controls['txtGender'].touched && registerForm.hasError('required', 'txtGender')" class="invalid-feedback d-block">Gender is required.</div>
+                    
+
+
+                    
+                        <div class="form-group icon-input mb-3">
+                            <i class="font-sm ti-email text-grey-500 pe-0"></i>
+                            <input type="text" class="style2-input ps-5 form-control text-grey-900 font-xsss fw-600" placeholder="Your Email Address" formControlName="txtEmail">
+                            <div *ngIf="registerForm.controls['txtEmail'].touched && registerForm.hasError('required', 'txtEmail')" class="invalid-feedback d-block">Email is required.</div>                
+                        </div>
+                        <div class="form-group icon-input mb-3 position-relative">
+                            <i class="font-sm ti-lock text-grey-500 pe-0"></i>
+                            <input [type]="showPassword ? 'text' : 'password'" 
+                                   class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" 
+                                   placeholder="Password" 
+                                   formControlName="txtPassword">
+                            <i class="feather-eye position-absolute end-0 top-50 translate-middle-y me-3 cursor-pointer" style="left: 90%;" 
+                               (click)="togglePasswordVisibility('password')"
+                               [class.feather-eye]="showPassword"
+                               [class.feather-eye-off]="!showPassword">
+                            </i>
+                            <div *ngIf="registerForm.controls['txtPassword'].touched && registerForm.hasError('required', 'txtPassword')" class="invalid-feedback d-block">Password is required.</div>
+                            <div *ngIf="registerForm.controls['txtPassword'].touched && registerForm.controls['txtPassword'].hasError('pattern')" 
+                            class="invalid-feedback d-block">
+                            Password must be exactly 7 characters long<br>
+                            Contain at least one number<br>
+                            One special character.
+                        </div>
+                        </div>
+                        
+                        <div class="form-group icon-input mb-1 position-relative">
+                            <i class="font-sm ti-lock text-grey-500 pe-0"></i>
+                            <input [type]="showConfirmPassword ? 'text' : 'password'" 
+                                   class="style2-input ps-5 form-control text-grey-900 font-xss ls-3" 
+                                   placeholder="Confirm Password" 
+                                   formControlName="txtConfirmPassword">
+                            <i class="feather-eye position-absolute end-0 top-50 translate-middle-y me-3 cursor-pointer" style="left: 90%;" 
+                               (click)="togglePasswordVisibility('confirmPassword')"
+                               [class.feather-eye]="showConfirmPassword"
+                               [class.feather-eye-off]="!showConfirmPassword">
+                            </i>
+                            <div *ngIf="registerForm.controls['txtConfirmPassword'].touched && registerForm.hasError('required', 'txtConfirmPassword')" class="invalid-feedback d-block">Confirm Password is required.</div>
+                            <div *ngIf="registerForm.controls['txtConfirmPassword'].touched && registerForm.controls['txtConfirmPassword'].hasError('notSame')" class="invalid-feedback d-block">Passwords do not match.</div>
+                        </div>
+                    </form>
+                     
+                    <div class="col-sm-12 p-0 text-left">
+                        <div class="form-group mb-1"><button (click)="addUser()" class="form-control text-center style2-input text-white fw-600 bg-dark border-0 p-0 cursor-pointer">Register</button></div>
+                        <h6 class="text-grey-500 font-xsss fw-500 mt-0 mb-0 lh-32">Already have account <a routerLink="/" class="fw-700 ms-1">Login</a></h6>
+                    </div>
+                     
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+
+
+</div>

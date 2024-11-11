@@ -1,0 +1,137 @@
+<div class="main-content bg-lightblue theme-dark-bg right-chat-active" style="padding-left: 0 !important; padding-right: 0 !important;">
+            
+            <div class="middle-sidebar-bottom">
+                <div class="middle-sidebar-left">
+                    <div class="middle-wrap">
+                        <div class="card w-100 border-0 bg-white shadow-xs p-0 mb-4">
+                            <div class="card-body p-4 w-100 border-0 d-flex rounded-3 bg-color">
+                                <a routerLink="/dashboard/profile" class="d-inline-block mt-2 text-decoration-none cursor-pointer"><i class="ti-arrow-left font-sm text-white"></i></a>
+                                <h4 class="font-xs text-white fw-600 ms-4 mb-0 mt-2">Account Details</h4>
+                            </div>
+                            <div class="card-body p-lg-5 p-4 w-100 border-0 ">
+                            <div class="row justify-content-center profileImage">
+
+                                <div class="col-lg-4 text-center">
+                                    <figure class="avatar ms-auto me-auto mb-0 mt-2 w100">
+                                        <img *ngIf="profileImageUrl; else defaultImage" 
+                                             [src]="profileImageUrl" alt="Profile Image" 
+                                             class="image-shadow rounded-3">
+                                    </figure>
+                                    <ng-template #defaultImage>
+                                        <img *ngIf="loggedinUser.gender === 'Male'; else femaleImage" 
+                                        src="../../assets/Images/male.png" 
+                                        alt="Default Male Profile Image" 
+                                        class="image-shadow rounded-3">
+                                        <ng-template #femaleImage>
+                                            <img *ngIf="loggedinUser.gender === 'Female'" 
+                                                    src="../../assets/Images/female.png" 
+                                                    alt="Default Female Profile Image" 
+                                                    class="image-shadow rounded-3">
+                                        </ng-template>
+                                       </ng-template>
+                                <h4 class="text-grey-500 fw-500 mb-3 font-xsss mb-4">Profile Image</h4>
+                                </div>
+                                
+                                <div class="col-lg-4 text-center">
+                                    <figure class="avatar ms-auto me-auto mb-0 mt-2 w100">
+                                        <img *ngIf="coverImageUrl; else defaultCoverImage" 
+                                             [src]="coverImageUrl" alt="Cover Image" 
+                                             class="image-shadow rounded-3">
+                                    </figure>
+                                    <ng-template #defaultCoverImage>
+                                        <figure class="avatar ms-auto me-auto mb-0 mt-2 w100">
+                                            <img src="assets/Images/cover.png" alt="Default Cover Image" 
+                                                 class="image-shadow rounded-3">
+                                        </figure>
+                                    </ng-template>
+                                <h4 class="text-grey-500 fw-500 mb-3 font-xsss mb-4">Cover Image</h4>
+                                </div>
+                                
+                                
+                            </div>
+
+                            <form [formGroup]="updateForm">
+                                <div class="row">
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="mont-font fw-600 font-xsss">First Name</label>
+                                            <input type="text" class="form-control" formControlName="txtfName">
+                                        </div>        
+                                    </div>
+
+                                    <div class="col-lg-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="mont-font fw-600 font-xsss">Last Name</label>
+                                            <input type="text" class="form-control" formControlName="txtlName">
+                                        </div>        
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="mont-font fw-600 font-xsss">Current Password</label>
+                                            <input type="password" class="form-control" formControlName="txtOldPassword">
+                                        </div>        
+                                    </div>
+
+                                    <div class="col-lg-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="mont-font fw-600 font-xsss">New Password</label>
+                                            <input type="password" class="form-control" formControlName="txtNewPassword">
+                                        </div>        
+                                    </div>
+
+                                    <div class="col-lg-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="mont-font fw-600 font-xsss">Confirm New Password</label>
+                                            <input type="password" class="form-control" formControlName="txtConfirmPassword">
+                                        </div>        
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 mb-3">
+                                        <div class="card mt-3 border-0">
+                                            <div class="card-body d-flex justify-content-between align-items-end p-0">
+                                                <div class="form-group mb-0 w-100">
+                                                    <input type="file" name="file" id="profile-file" class="input-file" formControlName="profileImg" (change)="onfileProfileSelected($event)">
+                                                    <label for="profile-file" class="rounded-3 text-center bg-white btn-tertiary js-labelFile p-4 w-100 border-dashed">
+                                                        <i class="ti-cloud-down large-icon me-3 d-block"></i>
+                                                        <span class="js-fileName">Drag and drop or click to replace Profile Image</span>
+                                                    </label>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 mb-3">
+                                        <div class="card mt-3 border-0">
+                                            <div class="card-body d-flex justify-content-between align-items-end p-0">
+                                                <div class="form-group mb-0 w-100">
+                                                    <input type="file" name="file" id="cover-file" class="input-file" formControlName="coverImg" (change)="onfileCoverSelected($event)">
+                                                    <img *ngIf="coverImageUrl" [src]="coverImageUrl" alt="Cover Image Preview" class="mt-3 rounded-3" style="max-width: 300px;">
+
+                                                    <label for="cover-file" class="rounded-3 text-center bg-white btn-tertiary js-labelFile p-4 w-100 border-dashed">
+                                                        <i class="ti-cloud-down large-icon me-3 d-block"></i>
+                                                        <span class="js-fileName">Drag and drop or click to replace Cover Image</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <a class="text-center text-white font-xsss fw-600 p-3 w175 rounded-3 d-inline-block bg-color cursor-pointer text-decoration-none" (click)="edit()">Save</a>
+                                    </div>
+                                </div>
+
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 
+            </div>            
+        </div>

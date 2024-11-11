@@ -1,0 +1,31 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="row w-100">
+    <!-- Left Column with Image -->
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <img src="../../assets/Images/code.jpg" alt="Illustration" class="img-fluid" style="max-width: 80%; max-height: 80%; object-fit: contain;">
+    </div>
+    
+    <!-- Right Column with Form -->
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <div class="card shadow-lg p-4" style="max-width: 400px; border-radius: 15px;">
+        <h2 class="text-center mb-4 fw-bold text-primary">Enter your code</h2>
+        
+        <!-- Code input form -->
+        <div class="form-group mb-4">
+          <input type="text" #code class="form-control form-control-lg py-3" placeholder="Enter code here" />
+        </div>
+
+        <div class="d-grid">
+          <button (click)="getUser()" class="btn btn-primary btn-lg py-3">Submit</button>
+        </div>
+
+        <!-- Note to user -->
+        <div class="mt-4 text-center">
+          <small class="text-muted">
+            <em>Please check your email for the verification code.</em>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

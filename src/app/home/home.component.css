@@ -1,0 +1,50 @@
+a{
+    text-decoration: none;    
+}
+
+.modal{
+    background-color: rgba(0, 0, 0, 0.7) !important; 
+}
+
+.btn-color{
+  
+}
+/* Card Styling */
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-body {
+    padding: 0;
+  }
+  
+  
+
+
+
+/* Heart button */
+.like-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: color 0.3s ease; /* Smooth transition */
+}
+
+.like-btn .liked {
+  color: #ff6961; /* Liked color for heart icon */
+}
+
+.like-btn .far.fa-heart {
+  color: #888; /* Default gray color for unliked heart */
+}
+
+.like-btn:hover .fas.fa-heart, 
+.like-btn:hover .far.fa-heart {
+  color: #ff6961; /* Same color on hover for visual feedback */
+}
+
+.liked{
+  margin-right: 0.5rem;
+}
